@@ -42,6 +42,17 @@ def display_scores():
 # Timer
 start_ticks = pygame.time.get_ticks()
 
+# Function to display timer
+def display_timer(elapsed_time):
+    remaining_time = (GAME_TIME - elapsed_time) // 1000
+    minutes = remaining_time // 60
+    seconds = remaining_time % 60
+    timer_text = f"{minutes:02d}:{seconds:02d}"
+
+    font = pygame.font.Font(None, 36)
+    text = font.render(timer_text, True, WHITE)
+    screen.blit(text, (WIDTH - 100, 10))
+    
 # Function to display game over and declare the winner
 def display_game_over():
     font = pygame.font.Font(None, 48)
@@ -63,7 +74,7 @@ def display_game_over():
 
     pygame.display.flip()
     pygame.time.delay(3000)
-
+    
 # Main game loop
 while True:
     elapsed_time = pygame.time.get_ticks() - start_ticks
@@ -77,7 +88,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
+            
     # Paddle movement
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w] and paddle_a.top > 0:
@@ -122,6 +133,9 @@ while True:
 
     # Display scores
     display_scores()
+    
+    # Display timer
+    display_timer(elapsed_time)
 
     # Update display
     pygame.display.flip()
