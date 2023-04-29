@@ -10,6 +10,7 @@ PADDLE_WIDTH, PADDLE_HEIGHT = 15, 100
 BALL_SIZE = 15
 PADDLE_SPEED = 7
 BALL_SPEED = 5
+GAME_TIME = 120000  # 2 minutes in milliseconds
 
 # Colors
 WHITE = (255, 255, 255)
@@ -37,9 +38,41 @@ def display_scores():
     font = pygame.font.Font(None, 36)
     text = font.render(f"{score_a} - {score_b}", True, WHITE)
     screen.blit(text, (WIDTH // 2 - text.get_width() // 2, 10))
+    
+# Timer
+start_ticks = pygame.time.get_ticks()
+
+# Function to display game over and declare the winner
+def display_game_over():
+    font = pygame.font.Font(None, 48)
+
+    game_over_text = font.render("GAME OVER", True, WHITE)
+    game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 50))
+    screen.blit(game_over_text, game_over_rect)
+
+    if score_a > score_b:
+        winner_text = "Player 1 Wins!"
+    elif score_a < score_b:
+        winner_text = "Player 2 Wins!"
+    else:
+        winner_text = "TIE!"
+
+    winner_surface = font.render(winner_text, True, WHITE)
+    winner_rect = winner_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 20))
+    screen.blit(winner_surface, winner_rect)
+
+    pygame.display.flip()
+    pygame.time.delay(3000)
 
 # Main game loop
 while True:
+    elapsed_time = pygame.time.get_ticks() - start_ticks
+
+    if elapsed_time >= GAME_TIME:
+        display_game_over()
+        pygame.quit()
+        sys.exit()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
