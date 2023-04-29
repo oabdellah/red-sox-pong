@@ -82,6 +82,8 @@ while True:
         
     # Ball collision with paddles and scoring
     if ball.colliderect(paddle_a) or ball.colliderect(paddle_b):
+        ball_speed_x = ball_speed_x * 1.2 if score % 5 == 4 else ball_speed_x
+        ball_speed_y = ball_speed_y * 1.2 if score % 5 == 4 else ball_speed_y
         ball_speed_x = -ball_speed_x
         score += 1
 
