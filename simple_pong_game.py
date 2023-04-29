@@ -19,14 +19,24 @@ BLACK = (0, 0, 0)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Pong')
 
-# Create paddles and ball
+# Create paddles, ball, and score
 paddle_a = pygame.Rect(10, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
 paddle_b = pygame.Rect(WIDTH - 20, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
 ball = pygame.Rect(WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2, BALL_SIZE, BALL_SIZE)
 
+# Scores
+score_a = 0
+score_b = 0
+
 # Ball velocity
 ball_speed_x = BALL_SPEED
 ball_speed_y = BALL_SPEED
+
+# Function to display scores
+def display_scores():
+    font = pygame.font.Font(None, 36)
+    text = font.render(f"{score_a} - {score_b}", True, WHITE)
+    screen.blit(text, (WIDTH // 2 - text.get_width() // 2, 10))
 
 # Main game loop
 while True:
@@ -58,8 +68,14 @@ while True:
     if ball.colliderect(paddle_a) or ball.colliderect(paddle_b):
         ball_speed_x = -ball_speed_x
 
-    # Ball out of bounds
-    if ball.left <= 0 or ball.right >= WIDTH:
+    # Ball out of bounds and scoring
+    if ball.left <= 0:
+        score_b += 1
+        ball.x = WIDTH // 2 - BALL_SIZE // 2
+        ball.y = HEIGHT // 2 - BALL_SIZE // 2
+        ball_speed_x = -ball_speed_x
+    elif ball.right >= WIDTH:
+        score_a += 1
         ball.x = WIDTH // 2 - BALL_SIZE // 2
         ball.y = HEIGHT // 2 - BALL_SIZE // 2
         ball_speed_x = -ball_speed_x
@@ -70,6 +86,9 @@ while True:
     pygame.draw.rect(screen, WHITE, paddle_b)
     pygame.draw.ellipse(screen, WHITE, ball)
     pygame.draw.aaline(screen, WHITE, (WIDTH // 2, 0), (WIDTH // 2, HEIGHT))
+
+    # Display scores
+    display_scores()
 
     # Update display
     pygame.display.flip()
