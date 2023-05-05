@@ -3,6 +3,8 @@ This is a game inspired by Red Sox game. Therefore, we decide to create a pong g
 
 In order to install this program, make sure to have pygame install.
 
+Link to our github page: https://xmei12.github.io/xmei12-red-sox-pong-game.github.io/
+
 
 
 
