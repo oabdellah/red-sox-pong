@@ -1,11 +1,13 @@
 import pygame
 import sys
+import random
 
 
 class ClassicPong:
     """
     Class representing the Classic Pong game mode.
     """
+
     def __init__(self, game):
         """
         Initialize the Classic Pong game mode.
@@ -31,7 +33,7 @@ class ClassicPong:
 
         # Colors
         WHITE = (255, 255, 255)
-        BLACK = (0, 0, 0)
+        BLACK = (183, 36, 36)  # The Background of the screen
 
         # Create the screen
         screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -49,6 +51,24 @@ class ClassicPong:
             HEIGHT // 2 - BALL_SIZE // 2,
             BALL_SIZE,
             BALL_SIZE,
+        )
+
+        color_ball = (
+            random.randint(0, 255),
+            random.randint(0, 255),
+            random.randint(0, 255),
+        )
+
+        paddle_a_color = (
+            random.randint(0, 255),
+            random.randint(0, 255),
+            random.randint(0, 255),
+        )
+
+        paddle_b_color = (
+            random.randint(0, 255),
+            random.randint(0, 255),
+            random.randint(0, 255),
         )
 
         # Scores
@@ -139,6 +159,22 @@ class ClassicPong:
             # Ball collision with paddles
             if ball.colliderect(paddle_a) or ball.colliderect(paddle_b):
                 ball_speed_x = -ball_speed_x
+                color_ball = (
+                    random.randint(0, 255),
+                    random.randint(0, 255),
+                    random.randint(0, 255),
+                )
+
+                paddle_a_color = (
+                    random.randint(0, 255),
+                    random.randint(0, 255),
+                    random.randint(0, 255),
+                )
+                paddle_b_color = (
+                    random.randint(0, 255),
+                    random.randint(0, 255),
+                    random.randint(0, 255),
+                )
 
             # Ball out of bounds and scoring
             if ball.left <= 0:
@@ -154,9 +190,9 @@ class ClassicPong:
 
             # Drawing objects
             screen.fill(BLACK)
-            pygame.draw.rect(screen, WHITE, paddle_a)
-            pygame.draw.rect(screen, WHITE, paddle_b)
-            pygame.draw.ellipse(screen, WHITE, ball)
+            pygame.draw.rect(screen, paddle_a_color, paddle_a)
+            pygame.draw.rect(screen, paddle_b_color, paddle_b)
+            pygame.draw.ellipse(screen, color_ball, ball)
             pygame.draw.aaline(screen, WHITE, (WIDTH // 2, 0), (WIDTH // 2, HEIGHT))
 
             # Display scores
