@@ -7,6 +7,8 @@ def home_page():
     
     # Constants
     WIDTH, HEIGHT = 800, 600
+    PADDLE_WIDTH, PADDLE_HEIGHT = 15, 100
+    BALL_SIZE = 15
 
     # Colors
     WHITE = (255, 255, 255)
@@ -20,26 +22,42 @@ def home_page():
     # Font and text
     font_large = pygame.font.Font(None, 72)
     font_medium = pygame.font.Font(None, 48)
+    font_small = pygame.font.Font(None, 36)
 
-    title_text = font_large.render("Welcome to Red", True, WHITE)
-    sox_text = font_large.render("SOX", True, RED)
-    pong_text = font_large.render("Pong!", True, WHITE)
-
+    title_text = font_large.render("Welcome to Red SOX Pong!", True, RED)
     choose_text = font_medium.render("Choose Game Mode", True, WHITE)
-    classic_text = font_medium.render("Classic Pong", True, WHITE)
-    team_text = font_medium.render("Team Pong", True, WHITE)
+    classic_text = font_small.render("Classic Pong", True, WHITE)
+    team_text = font_small.render("Team Pong", True, WHITE)
+
+    # Paddles and ball
+    paddle_a = pygame.Rect(10, HEIGHT // 2 - PADDLE_HEIGHT // 2 - 50, PADDLE_WIDTH, PADDLE_HEIGHT)
+    paddle_b = pygame.Rect(WIDTH - 20, HEIGHT // 2 - PADDLE_HEIGHT // 2 + 50, PADDLE_WIDTH, PADDLE_HEIGHT)
+    ball = pygame.Rect(WIDTH // 2 + 250, HEIGHT // 2 - BALL_SIZE // 2, BALL_SIZE, BALL_SIZE)
 
     # Main loop for the home page
     while True:
         screen.fill(BLACK)
 
         # Display text
-        screen.blit(title_text, (WIDTH // 2 - 200, 50))
-        screen.blit(sox_text, (WIDTH // 2 + 10, 50))
-        screen.blit(pong_text, (WIDTH // 2 - 30, 120))
-        screen.blit(choose_text, (WIDTH // 2 - 120, 250))
-        screen.blit(classic_text, (WIDTH // 2 - 130, 350))
-        screen.blit(team_text, (WIDTH // 2 - 80, 450))
+        title_rect = title_text.get_rect(center=(WIDTH // 2, 50))
+        screen.blit(title_text, title_rect)
+        
+        choose_rect = choose_text.get_rect(center=(WIDTH // 2, 250))
+        screen.blit(choose_text, choose_rect)
+        
+        classic_rect = classic_text.get_rect(center=(WIDTH // 2, 350))
+        team_rect = team_text.get_rect(center=(WIDTH // 2, 450))
+
+        pygame.draw.rect(screen, WHITE, classic_rect.inflate(20, 10), 2)
+        pygame.draw.rect(screen, WHITE, team_rect.inflate(20, 10), 2)
+        
+        screen.blit(classic_text, classic_rect)
+        screen.blit(team_text, team_rect)
+
+        # Draw paddles and ball
+        pygame.draw.rect(screen, WHITE, paddle_a)
+        pygame.draw.rect(screen, WHITE, paddle_b)
+        pygame.draw.ellipse(screen, WHITE, ball)
 
         # Event handling
         for event in pygame.event.get():
@@ -48,10 +66,10 @@ def home_page():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
-                if WIDTH // 2 - 130 <= x <= WIDTH // 2 + 130 and 350 <= y <= 390:
+                if classic_rect.collidepoint(x, y):
                     # Classic Pong game mode
                     pong_game()
-                if WIDTH // 2 - 80 <= x <= WIDTH // 2 + 80 and 450 <= y <= 490:
+                if team_rect.collidepoint(x, y):
                     # Team Pong game mode
                     team_pong_game()
 
