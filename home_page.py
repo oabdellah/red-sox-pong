@@ -3,6 +3,12 @@ import sys
 
 # Home page function
 def home_page():
+    """
+    Displaying the color of the screen as well as variable for the pongs and paddle that we want to display in the home screen. 
+
+    Returns:
+        the color of the screen, the paddle, the pong ball
+    """
     pygame.init()
     
     # Constants

@@ -81,6 +81,12 @@ class ClassicPong:
 
         # Function to display scores
         def display_scores():
+             """
+            Display the score of the game
+
+            Returns:
+                The score will return in a form of score: "number digits"
+            """
             font = pygame.font.Font(None, 36)
             text = font.render(f"{score_a} - {score_b}", True, WHITE)
             screen.blit(text, (WIDTH // 2 - text.get_width() // 2, 10))
@@ -90,6 +96,15 @@ class ClassicPong:
 
         # Function to display timer
         def display_timer(elapsed_time):
+            """
+            Display the timer as it deceased.
+
+            args:
+                elapsed_time: the amount of tim
+
+            Returns:
+                displays timer in in form of 0:00 minutes:seconds and its the amount of time left
+            """      
             remaining_time = (GAME_TIME - elapsed_time) // 1000
             minutes = remaining_time // 60
             seconds = remaining_time % 60
@@ -101,6 +116,12 @@ class ClassicPong:
 
         # Function to display game over and declare the winner
         def display_game_over():
+            """
+            Indicating the game is over and report the score the player receive.
+
+            Returns:
+                "Game over " will be display following by the score report in form of score: number digits
+            """
             font = pygame.font.Font(None, 48)
 
             game_over_text = font.render("GAME OVER", True, WHITE)
@@ -265,12 +286,24 @@ class TeamPong:
 
         # Function to display score
         def display_score():
+            """
+            Display the score of the game everytime the pong hits the paddle.
+
+            Returns:
+                The score will return in a form of score: "number digits"
+            """
             font = pygame.font.Font(None, 36)
             text = font.render(f"Score: {score}", True, WHITE)
             screen.blit(text, (WIDTH - 120, 10))
 
         # Function to display game over
         def display_game_over():
+            """
+            Indicating the game is over and report the score the player receive.
+
+            Returns:
+                "Game over " will be display following by the score report in form of score: number digits
+            """
             font = pygame.font.Font(None, 48)
 
             game_over_text = font.render("GAME OVER", True, WHITE)

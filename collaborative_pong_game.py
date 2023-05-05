@@ -34,12 +34,24 @@ ball_speed_y = BALL_SPEED
 
 # Function to display score
 def display_score():
+    """
+    Display the score of the game everytime the pong hits the paddle.
+
+    Returns:
+        The score will return in a form of score: "number digits"
+    """
     font = pygame.font.Font(None, 36)
     text = font.render(f"Score: {score}", True, WHITE)
     screen.blit(text, (WIDTH - 120, 10))
     
 # Function to display game over
 def display_game_over():
+    """
+    Display game over and stops the game
+
+    Returns:
+        it will display "game over" and the score reach so far. 
+    """
     font = pygame.font.Font(None, 48)
 
     game_over_text = font.render("GAME OVER", True, WHITE)

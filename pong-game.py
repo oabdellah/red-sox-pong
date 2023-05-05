@@ -16,6 +16,12 @@ pygame.display.set_caption('My Game!')
  
 # The main function that controls the game
 def main () :
+  """
+  Indicating the game is over and report the score the player receive.
+
+  Returns:
+      "Game over " will be display following by the score report in form of score: number digits
+  """
   looping = True
   
   # The main game loop

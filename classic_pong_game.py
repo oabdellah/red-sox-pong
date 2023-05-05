@@ -35,6 +35,11 @@ ball_speed_y = BALL_SPEED
 
 # Function to display scores
 def display_scores():
+    """
+    Displays the scores in the font choice and the location we decided. 
+    Returns:
+        It will display score in form of "number digit" - "number digit" 
+    """
     font = pygame.font.Font(None, 36)
     text = font.render(f"{score_a} - {score_b}", True, WHITE)
     screen.blit(text, (WIDTH // 2 - text.get_width() // 2, 10))
@@ -44,6 +49,16 @@ start_ticks = pygame.time.get_ticks()
 
 # Function to display timer
 def display_timer(elapsed_time):
+    """
+    Display the timer of the game decreasing over time given the Game time subtracting elapsed time.
+
+
+    Args:
+        elapsed_time: an int or float representing the amount time decreasing by miliseconds
+
+    Returns:
+        The amount of time in minutes and seconds the player has left in the game. 
+    """
     remaining_time = (GAME_TIME - elapsed_time) // 1000
     minutes = remaining_time // 60
     seconds = remaining_time % 60
@@ -55,6 +70,12 @@ def display_timer(elapsed_time):
     
 # Function to display game over and declare the winner
 def display_game_over():
+    """
+    Onced there is no more time or the timer is 0:00, the screen will stop the whole game with game over indicated in the middle of the screen.
+
+    Returns:
+        returns the screen saying game over and whichever players wins depending on whichever players has the highest scores. 
+    """
     font = pygame.font.Font(None, 48)
 
     game_over_text = font.render("GAME OVER", True, WHITE)
