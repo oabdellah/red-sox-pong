@@ -1,12 +1,23 @@
 import pygame
 import sys
 
+
 class ClassicPong:
+    """
+    Class representing the Classic Pong game mode.
+    """
     def __init__(self, game):
+        """
+        Initialize the Classic Pong game mode.
+
+        :param game: Game instance
+        """
         self.game = game
 
     def start_game(self):
-        # Code for Classic Pong game mode
+        """
+        Start the Classic Pong game mode and handle game logic.
+        """
         # Initialize Pygame
         pygame.init()
 
@@ -24,12 +35,21 @@ class ClassicPong:
 
         # Create the screen
         screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption('Pong')
+        pygame.display.set_caption("Pong")
 
         # Create paddles, ball, and score
-        paddle_a = pygame.Rect(10, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
-        paddle_b = pygame.Rect(WIDTH - 20, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
-        ball = pygame.Rect(WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2, BALL_SIZE, BALL_SIZE)
+        paddle_a = pygame.Rect(
+            10, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT
+        )
+        paddle_b = pygame.Rect(
+            WIDTH - 20, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT
+        )
+        ball = pygame.Rect(
+            WIDTH // 2 - BALL_SIZE // 2,
+            HEIGHT // 2 - BALL_SIZE // 2,
+            BALL_SIZE,
+            BALL_SIZE,
+        )
 
         # Scores
         score_a = 0
@@ -64,7 +84,9 @@ class ClassicPong:
             font = pygame.font.Font(None, 48)
 
             game_over_text = font.render("GAME OVER", True, WHITE)
-            game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 50))
+            game_over_rect = game_over_text.get_rect(
+                center=(WIDTH // 2, HEIGHT // 2 - 50)
+            )
             screen.blit(game_over_text, game_over_rect)
 
             if score_a > score_b:
@@ -148,13 +170,23 @@ class ClassicPong:
             pygame.time.delay(20)
 
 
-
 class TeamPong:
+    """
+    Class representing the Classic Pong game mode.
+    """
+
     def __init__(self, game):
+        """
+        Initialize the Team Pong game mode.
+
+        :param game: Game instance
+        """
         self.game = game
 
     def start_game(self):
-        # Code for Team Pong game mode
+        """
+        Start the Team Pong game mode and handle game logic.
+        """
         # Initialize Pygame
         pygame.init()
 
@@ -172,12 +204,21 @@ class TeamPong:
 
         # Create the screen
         screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption('Pong')
+        pygame.display.set_caption("Pong")
 
         # Create paddles, ball, and score
-        paddle_a = pygame.Rect(10, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
-        paddle_b = pygame.Rect(WIDTH - 20, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
-        ball = pygame.Rect(WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2, BALL_SIZE, BALL_SIZE)
+        paddle_a = pygame.Rect(
+            10, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT
+        )
+        paddle_b = pygame.Rect(
+            WIDTH - 20, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT
+        )
+        ball = pygame.Rect(
+            WIDTH // 2 - BALL_SIZE // 2,
+            HEIGHT // 2 - BALL_SIZE // 2,
+            BALL_SIZE,
+            BALL_SIZE,
+        )
 
         # Score
         score = 0
@@ -197,7 +238,9 @@ class TeamPong:
             font = pygame.font.Font(None, 48)
 
             game_over_text = font.render("GAME OVER", True, WHITE)
-            game_over_rect = game_over_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 50))
+            game_over_rect = game_over_text.get_rect(
+                center=(WIDTH // 2, HEIGHT // 2 - 50)
+            )
             screen.blit(game_over_text, game_over_rect)
 
             score_text = f"Score: {score}"
