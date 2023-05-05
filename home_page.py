@@ -4,7 +4,10 @@ import pygame
 pygame.init()
 
 # create the screen
-screen = pygame.display.set_mode()
+SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 800
 
-while True: 
-    
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_capton('button demo')
+
+#
